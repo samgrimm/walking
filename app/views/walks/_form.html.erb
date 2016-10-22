@@ -1,0 +1,41 @@
+<%= form_for(walk) do |f| %>
+  <% if walk.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(walk.errors.count, "error") %> prohibited this walk from being saved:</h2>
+
+      <ul>
+      <% walk.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.fields_for :start_location_attributes do |ff| %>
+       <%= ff.text_field :address ,  placeholder: "enter your starting point.", class:"form-control" %>
+     <% end -%>
+  </div>
+
+  <div class="field">
+    <%= f.fields_for :end_location_attributes do |ff| %>
+       <%= ff.text_field :address ,  placeholder: "enter your end point.", class:"form-control" %>
+     <% end -%>
+  </div>
+
+
+
+  <div class="field">
+    <%= f.label :fatalities %>
+    <%= f.check_box :fatalities %>
+  </div>
+
+  <div class="field">
+    <%= f.label :crime %>
+    <%= f.check_box :crime %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

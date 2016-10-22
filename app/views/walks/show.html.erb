@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start address:</strong>
+  <%= @walk.start_location.address %>
+</p>
+
+<p>
+  <strong>End address:</strong>
+  <%= @walk.end_location.address %>
+</p>
+
+<p>
+  <strong>Fatalities:</strong>
+  <%= @walk.fatalities %>
+</p>
+
+<p>
+  <strong>Crime:</strong>
+  <%= @walk.crime %>
+</p>
+<%= content_tag :div,
+  class: "lat_information",
+  data: {lat: @walk.start_location.latitude, lng: @walk.start_location.longitude} do %>
+<% end %>
+ <div id="map">
+
+
+ </div>
+
+ <script>
+
+    handler = Gmaps.build('Google');
+    markers = handler.addMarkers(<%=raw @hash.to_json %>);
+    handler.buildMap({
+    provider: {
+      disableDefaultUI: true
+      // pass in other Google Maps API options here
+    },
+    internal: {
+      id: 'map'
+    }
+  },
+  function(){
+    markers = handler.addMarkers([
+      {
+        "lat": 0,
+        "lng": 0,
+        "picture": {
+          "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
+          "width":  32,
+          "height": 32
+        },
+        "infowindow": "hello!"
+      }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+  }
+);
+
+</script>
+
+<%= link_to 'Edit', edit_walk_path(@walk) %> |
+<%= link_to 'Back', walks_path %>

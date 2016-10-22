@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_address: MyString
+  end_address: MyString
+  fatalities: false
+  crime: false
+
+two:
+  start_address: MyString
+  end_address: MyString
+  fatalities: false
+  crime: false
