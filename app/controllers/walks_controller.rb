@@ -15,6 +15,8 @@ class WalksController < ApplicationController
   @hash = Gmaps4rails.build_markers(@walk) do |walk, marker|
   marker.lat walk.start_location.latitude
   marker.lng walk.start_location.longitude
+  @issue = Issue.new
+  @issues = Issue.all
 end
   end
 

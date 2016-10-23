@@ -19,8 +19,29 @@
     <% end %>
     <button id='report'>Report Issue</button>
   </div>
+  <div class="form-group">
+    <%= form_for(@issue) do |f| %>
+      <%= f.text_field :lat, class:"form-control", id:"issue_lat", style:"display:none;" %>
+      <%= f.text_field :lng , class:"form-control" , id:"issue_long", style:"display:none;" %>
+      <div id="allFields" style="display:none;">
+      <div class="field">
+        <%= f.label :description %>
+        <%= f.text_field :description , class:"form-control" , id:"issue_desc" %>
+      </div>
+      <div class="field">
+        <%= f.label :category %>
+        <%= f.select :category, ['Does Not Exist', 'Large Crack', 'Obstacle'] %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Report it!", class:"btn btn-large btn-default", id:'submitted' %>
+      </div>
+    </div>
+    <% end%>
+    <button id='confirm'>Confirm Position</button>
+
+  </div>
 </div>
-<div>
+</div>
 
 <%= content_tag :div,
   class: "start_information",
@@ -30,6 +51,11 @@
 <%= content_tag :div,
   class: "end_information",
   data: {lat: @walk.end_location.latitude, lng: @walk.end_location.longitude} do %>
+<% end %>
+
+<%= content_tag :div,
+  class: "all_issues",
+  data: {issues: @issues} do %>
 <% end %>
 <div class="col-md-6">
 
@@ -76,15 +102,17 @@
 
      var geoCoder = new google.maps.Geocoder();
 
-     function addNewMarker(markerMap, markerLat, markerLng, draggable){
+     function addNewMarker(markerMap, markerLat, markerLng, draggable, markerIcon){
          //create new marker
          console.log(markerLat, markerLng);
          var marker = new google.maps.Marker({
              position: new google.maps.LatLng(markerLat, markerLng),
-             draggable: draggable || false
+             draggable: draggable || false,
+             icon: markerIcon || 'https://raw.githubusercontent.com/google/material-design-icons/master/maps/1x_web/ic_add_location_black_24dp.png'
          });
          //run setmap
          marker.setMap(markerMap);
+         return marker;
      }
      ////crime map data
      var heatmapData = [];
@@ -139,28 +167,69 @@
        type: 'GET'
     });
 
- 	//adding issue by dropping pin on map
- 	//on click will add draggable pin on current location
- 	var dropButton = document.getElementById('report');
- 	dropButton.addEventListener('click', function(e){
- 		console.log('triggered');
- 		addNewMarker(map, currentLat, currentLng, true);
- 	});
+    //******
+   	var newMarker;
+   	//adding issue by dropping pin on map
+   	//on click will add draggable pin on current location
+   	var dropButton = document.getElementById('report');
+   	dropButton.addEventListener('click', function(e){
+   		console.log('triggered');
+   		newMarker = addNewMarker(map, currentLat, currentLng, true);
+      console.log('marker', newMarker);
+      $("#confirm").css("display","block");
+   	});
 
- 	//form will pop up with description field and category field
+   	//form will pop up with description field and category field
 
- 	var submitBtn = document.getElementById('submitted');
- 	submitBtn.addEventListener('click', function(e){
- 		console.log('triggered');
- 		var form = document.getElementById('issueForm');
- 		var elements = form.elements;
- 		console.log(elements.description.value);
+   	//custom icons
+       var iconBase = 'https://raw.githubusercontent.com/google/material-design-icons/master/';
+       var icons = {
+             dne: iconBase + 'social/1x_web/ic_sentiment_dissatisfied_black_24dp.png',
+             crack: iconBase + 'maps/1x_web/ic_terrain_black_24dp.png',
+             obstacle: iconBase + 'alert/1x_web/ic_error_outline_black_24dp.png'
+           };
 
- 		//once submit button is clicked the descrpiton, category and lat/long will be saved to database
- 		//get lat and lng of marker above
- 		//ajax request to db >> send {description: , category: , lat: , lng: }
- 	});
+     var confirmBtn = document.getElementById('confirm');
+    	confirmBtn.addEventListener('click', function(e){
+       $("#issue_lat")[0].value = newMarker.position.lat();
+       $("#issue_long")[0].value = newMarker.position.lng();
+       $("#allFields").css("display","block");
+       $("#confirm").css("display","none");
+     });
+   	var submitBtn = document.getElementById('submitted');
+   	submitBtn.addEventListener('click', function(e){
 
+   		var categoryName;//needs to be "name" of category user picks
+   		var newIssue = {
+   			lat: newMarker.position.lat(),
+   			lng: newMarker.position.lng(),
+   			description: 'sample description', ///needs to come from user input
+   			category: 'sample category', //needs to come from user input
+   			iconImage: icons[categoryName]
+   		};
+      //Still need to write on the rails form
+
+   	 //change icon according to what category user sets
+   	 newMarker.setIcon(icons[categoryName]);
+   	});
+   //////under construction - need to connect to db
+
+
+   //
+
+   	var issuePoints= $('.all_issues').data('issues');
+    console.log(issuePoints);
+    displayIssues(issuePoints);
+   	//need to query database and load markers on load
+   	 function displayIssues(issuePoints) { ///is this working properly?
+         	issuePoints.forEach(function(point){
+         		// issuePoints.push(new google.maps.Marker({
+   	       //      position: new google.maps.LatLng(point.lat, point.lng)
+           //   	}));
+           	addNewMarker(map, point.lat, point.lng, false);
+         	});
+    }
+   //////////////
 
  	//need to query database and load markers on load
 
