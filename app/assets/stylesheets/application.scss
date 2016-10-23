@@ -10,5 +10,14 @@
  }
 
  .navbar i {
-   font-size: 48pt;
+   font-size: 30pt;
+   line-height: 0.4em;
  }
+
+.collapse {
+  display: inline-block;
+}
+
+.nav .navbar-nav {
+  display: inline-block;
+}
