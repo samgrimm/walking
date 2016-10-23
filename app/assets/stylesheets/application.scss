@@ -1,0 +1,14 @@
+ // Custom bootstrap variables must be set or imported before bootstrap itself.
+ @import "bootstrap";
+
+ .navbar {
+   background: #1976d2;
+ }
+ .navbar a {
+   vertical-align: middle;
+   color: #FFFFFF;
+ }
+
+ .navbar i {
+   font-size: 48pt;
+ }

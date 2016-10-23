@@ -21,6 +21,14 @@ gem 'gmaps4rails' #google maps gem
 gem 'underscore-rails' # dependency for google maps gem
 gem 'geocoder' #geocoding api to get latitude and longitude information for the models.
 
+gem 'bootstrap', '~> 4.0.0.alpha5'
+
+#Devise For logins
+
+gem 'devise'
+gem 'omniauth'
+gem "omniauth-google-oauth2"
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks

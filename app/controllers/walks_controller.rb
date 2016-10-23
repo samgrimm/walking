@@ -1,10 +1,11 @@
 class WalksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_walk, only: [:show, :edit, :update, :destroy]
 
   # GET /walks
   # GET /walks.json
   def index
-    @walks = Walk.all
+    @walks = current_user.walks
   end
 
   # GET /walks/1
@@ -29,7 +30,7 @@ end
   # POST /walks
   # POST /walks.json
   def create
-    @walk = Walk.new(walk_params)
+    @walk = current_user.walks.new(walk_params)
 
     respond_to do |format|
       if @walk.save

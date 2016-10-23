@@ -23,42 +23,117 @@
   class: "lat_information",
   data: {lat: @walk.start_location.latitude, lng: @walk.start_location.longitude} do %>
 <% end %>
- <div id="map">
-
-
- </div>
+ <div id="map" style="height: 500px; width: 500px; margin: auto;"></div>
+ <button id='report'>Report Issue</button>
 
  <script>
+ window.onload =function(){
+ 	var currentLat = 30.263811840754933;//need to build this
+ 	var currentLng = -97.74955529719591; //need to build this
+ 	var crimePoints;
 
-    handler = Gmaps.build('Google');
-    markers = handler.addMarkers(<%=raw @hash.to_json %>);
-    handler.buildMap({
-    provider: {
-      disableDefaultUI: true
-      // pass in other Google Maps API options here
-    },
-    internal: {
-      id: 'map'
-    }
-  },
-  function(){
-    markers = handler.addMarkers([
-      {
-        "lat": 0,
-        "lng": 0,
-        "picture": {
-          "url": "http://people.mozilla.com/~faaborg/files/shiretoko/firefoxIcon/firefox-32.png",
-          "width":  32,
-          "height": 32
-        },
-        "infowindow": "hello!"
-      }
-    ]);
-    handler.bounds.extendWith(markers);
-    handler.fitMapToBounds();
-  }
-);
+ 	var mapOptions = {
+         center: new google.maps.LatLng(currentLat, currentLng),
+         zoom: 10,
+         mapTypeId: google.maps.MapTypeId.ROADMAP
+     };
 
+     //initializing map
+     var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+     var geoCoder = new google.maps.Geocoder();
+
+     function addNewMarker(markerMap, markerLat, markerLng, draggable){
+         //create new marker
+         console.log(markerLat, markerLng);
+         var marker = new google.maps.Marker({
+             position: new google.maps.LatLng(markerLat, markerLng),
+             draggable: draggable || false
+         });
+         //run setmap
+         marker.setMap(markerMap);
+     }
+     ////crime map data
+     var heatmapData = [];
+
+ 	$.ajax({
+       url: 'https://data.austintexas.gov/resource/cjvh-tswx.json',
+       error: function() {
+          console.error('an error occurred');
+       },
+       success: function(data) { ///is this working properly?
+       	crimePoints = data.filter(function(point){
+       		if(point.go_location && point.go_location_zip){
+       			geoCoder.geocode({'address': point.go_location.trim() + " " + point.go_location_zip.trim()}, function(result, status){
+        			if(status=="OK"){
+             		point.lat = result[0].geometry.location.lat();
+             		point.lng = result[0].geometry.location.lng();
+             		heatmapData.push(new google.maps.LatLng(point.lat, point.lng));
+          		}
+       		});
+       		}
+
+       	});
+       	var heatmap = new google.maps.visualization.HeatmapLayer({
+ 			data: heatmapData
+ 		});
+ 		heatmap.setMap(map);
+       },
+       type: 'GET'
+    });
+
+ 	//fatalities data
+ 	var fatalMarkers = [];
+ 	var fatalitiesPoints;
+ 	$.ajax({
+       url: 'https://data.austintexas.gov/resource/i3kd-c47g.json?killed_driver_pass=ped',
+       error: function() {
+          console.error('an error occurred');
+       },
+       success: function(data) { ///is this working properly?
+       	fatalitiesPoints = data.filter(function(point){
+       		point.lat = point.location_1.coordinates[0];
+       		point.lng = point.location_1.coordinates[1];
+       		fatalMarkers.push(new google.maps.Marker({
+ 	            position: new google.maps.LatLng(point.lat, point.lng)
+           	}));
+
+       	});
+       	var markerCluster = new MarkerClusterer(map, fatalMarkers,
+             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'}
+         );
+       },
+       type: 'GET'
+    });
+
+ 	//adding issue by dropping pin on map
+ 	//on click will add draggable pin on current location
+ 	var dropButton = document.getElementById('report');
+ 	dropButton.addEventListener('click', function(e){
+ 		console.log('triggered');
+ 		addNewMarker(map, currentLat, currentLng, true);
+ 	});
+
+ 	//form will pop up with description field and category field
+
+ 	var submitBtn = document.getElementById('submitted');
+ 	submitBtn.addEventListener('click', function(e){
+ 		console.log('triggered');
+ 		var form = document.getElementById('issueForm');
+ 		var elements = form.elements;
+ 		console.log(elements.description.value);
+
+ 		//once submit button is clicked the descrpiton, category and lat/long will be saved to database
+ 		//get lat and lng of marker above
+ 		//ajax request to db >> send {description: , category: , lat: , lng: }
+ 	});
+
+
+ 	//need to query database and load markers on load
+
+
+
+ };
 </script>
 
 <%= link_to 'Edit', edit_walk_path(@walk) %> |
