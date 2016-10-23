@@ -77,10 +77,15 @@ function displayCurrLoc(lat, lng){
   alert('Lat' + lat + ' Long ' + lng);
   $('#Lat').html( "Your latitude is: " + lat); //this is a paragraph tag
   $('#Long').html("Your longitude is: " + lng); //this is a paragraph tag
-  var mapCanvas = $("#map");//this is a div called map that should display the map based on the long & lat
-  var mapOptions = { center: new google.maps.LatLng(lat,lng),zoom: 20 ,  mapTypeId: google.maps.MapTypeId.ROADMAP};
-  var map = new google.maps.Map(mapCanvas, mapOptions);
-
+  // var mapCanvas = $("#map");//this is a div called map that should display the map based on the long & lat
+  // var mapOptions = { center: new google.maps.LatLng(lat,lng),zoom: 20 ,  mapTypeId: google.maps.MapTypeId.ROADMAP};
+  // var map = new google.maps.Map(mapCanvas, mapOptions);
+  var mapOptions = {
+         zoom: 20,
+         center: {lat: lat, lng: lng}
+       };
+       map = new google.maps.Map(document.getElementById('map'),
+           mapOptions);
   }
 
 });
