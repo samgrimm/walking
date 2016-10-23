@@ -1,44 +1,60 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+<div class="panel panel-default">
+  <div class="panel-body">
+    <strong>Start address:</strong>
+    <%= @walk.start_location.address %>
 
-<p>
-  <strong>Start address:</strong>
-  <%= @walk.start_location.address %>
-</p>
+    <strong>End address:</strong>
+    <%= @walk.end_location.address %>
+  </div>
+  <div class="panel-footer">
+    <% if @walk.fatalities %>
+    <strong>Fatalities</strong>
+    <% end %>
+    <% if @walk.crime %>
+    <strong>Crime</strong>
+    <% end %>
+    <button id='report'>Report Issue</button>
+  </div>
+</div>
+<div>
 
-<p>
-  <strong>End address:</strong>
-  <%= @walk.end_location.address %>
-</p>
-
-<p>
-  <strong>Fatalities:</strong>
-  <%= @walk.fatalities %>
-</p>
-
-<p>
-  <strong>Crime:</strong>
-  <%= @walk.crime %>
-</p>
 <%= content_tag :div,
-  class: "lat_information",
+  class: "start_information",
   data: {lat: @walk.start_location.latitude, lng: @walk.start_location.longitude} do %>
 <% end %>
- <div id="map" style="height: 500px; width: 500px; margin: auto;"></div>
- <button id='report'>Report Issue</button>
 
+<%= content_tag :div,
+  class: "end_information",
+  data: {lat: @walk.end_location.latitude, lng: @walk.end_location.longitude} do %>
+<% end %>
+<div class="col-md-6">
+
+ <div id="map" style="height: 500px; width: 500px; margin: auto;"></div>
+
+
+</div>
+</div>
+</div>
  <script>
  window.onload =function(){
    var directionsDisplay;
    var directionsService = new google.maps.DirectionsService();
 
-   var currentLat = $('.lat_information').data('lat');
-   var currentLng = $('.lat_information').data('lng');
+   var currentLat = $('.start_information').data('lat');
+   var currentLng = $('.start_information').data('lng');
+
+   var endLat = $('.end_information').data('lat');
+   var endLng = $('.end_information').data('lng');
  // 	var currentLat = 30.263811840754933;//need to build this
  // 	var currentLng = -97.74955529719591; //need to build this
 
  // Route coordinates
  var start_loc = new google.maps.LatLng(currentLat, currentLng);
- var end_loc = new google.maps.LatLng(30.268915, -97.740378);
+ var end_loc = new google.maps.LatLng(endLat, endLng);
 
  calcRoute();
 

@@ -34,8 +34,8 @@ end
 
     respond_to do |format|
       if @walk.save
-
         @walk.create_start_location(start_location_params[:start_location_attributes])
+
         @walk.create_end_location(end_location_params[:end_location_attributes])
 
         format.html { redirect_to @walk, notice: 'Walk was successfully created.' }
@@ -81,7 +81,7 @@ end
     end
 
     def start_location_params
-      params.require(:walk).permit(:start_location_attributes =>[:address])
+      params.require(:walk).permit(:start_location_attributes =>[:address, :latitude, :longitude])
     end
 
     def end_location_params
