@@ -37,8 +37,10 @@
  // 	var currentLng = -97.74955529719591; //need to build this
 
  // Route coordinates
- var start_loc = ' " ' + document.getElementById("start_loc").value + ' " ';
- var end_loc = ' " ' + document.getElementById("end_loc").value + ' " ';
+ var start_loc = new google.maps.LatLng(currentLat, currentLng);
+ var end_loc = new google.maps.LatLng(30.268915, -97.740378);
+
+ calcRoute();
 
  //Crime Points
  	var crimePoints;
@@ -154,7 +156,7 @@
           origin: start_loc,
           destination: end_loc,
           provideRouteAlternatives: true,
-          travelMode: google.maps.TravelMode[WALKING]
+          travelMode: 'WALKING'
       };
       //call directionsService.route to initiate a request to the directions service.
       //pass it a directions request object and a callback method to execute upon
