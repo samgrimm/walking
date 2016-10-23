@@ -36,7 +36,7 @@ end
       if @walk.save
 
         @walk.create_start_location(start_location_params[:start_location_attributes])
-        @walk.create_end_location(end_location_params[:end_location_params])
+        @walk.create_end_location(end_location_params[:end_location_attributes])
 
         format.html { redirect_to @walk, notice: 'Walk was successfully created.' }
         format.json { render :show, status: :created, location: @walk }
