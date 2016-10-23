@@ -28,9 +28,22 @@
 
  <script>
  window.onload =function(){
- 	var currentLat = 30.263811840754933;//need to build this
- 	var currentLng = -97.74955529719591; //need to build this
+   var directionsDisplay;
+   var directionsService = new google.maps.DirectionsService();
+
+   var currentLat = $('.lat_information').data('lat');
+   var currentLng = $('.lat_information').data('lng');
+ // 	var currentLat = 30.263811840754933;//need to build this
+ // 	var currentLng = -97.74955529719591; //need to build this
+
+ // Route coordinates
+ var start_loc = ' " ' + document.getElementById("start_loc").value + ' " ';
+ var end_loc = ' " ' + document.getElementById("end_loc").value + ' " ';
+
+ //Crime Points
  	var crimePoints;
+
+  directionsDisplay = new google.maps.DirectionsRenderer();
 
  	var mapOptions = {
          center: new google.maps.LatLng(currentLat, currentLng),
@@ -40,6 +53,8 @@
 
      //initializing map
      var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+     directionsDisplay.setMap(map);
 
      var geoCoder = new google.maps.Geocoder();
 
@@ -131,7 +146,36 @@
 
  	//need to query database and load markers on load
 
+  //Route Calculation
 
+  function calcRoute() {
+      //create directions request object
+      var request = {
+          origin: start_loc,
+          destination: end_loc,
+          provideRouteAlternatives: true,
+          travelMode: google.maps.TravelMode[WALKING]
+      };
+      //call directionsService.route to initiate a request to the directions service.
+      //pass it a directions request object and a callback method to execute upon
+      //receipt of response
+      directionsService.route(request, function(response, status) {
+          if (status == 'OK') {
+              //loop through and display route options
+              for (var i = 0, len = response.routes.length; i < len; i++) {
+                  //display directionsResult using a directionsRenderer
+                  new google.maps.DirectionsRenderer({
+                      map: map,
+                      directions: response,
+                      routeIndex: i
+                  });
+              }
+          } else {
+              $("#error").append("Unable to retrieve your route<br />");
+
+          }
+      });
+  }
 
  };
 </script>
