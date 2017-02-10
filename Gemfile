@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-ruby "2.2.3"
+ruby "2.4.0"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', github: 'rails/rails', branch: "5-0-stable"
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -23,8 +23,11 @@ gem 'gmaps4rails' #google maps gem
 gem 'underscore-rails' # dependency for google maps gem
 gem 'geocoder' #geocoding api to get latitude and longitude information for the models.
 
-gem 'bootstrap', '~> 4.0.0.alpha5'
-
+gem 'bootstrap', '~> 4.0.0.alpha6'
+gem "font-awesome-rails"
+source "https://rails-assets.org" do
+  gem "rails-assets-tether"
+end
 #Devise For logins
 
 gem 'devise'
@@ -34,7 +37,7 @@ gem "omniauth-google-oauth2"
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks', '~> 5'
+#gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -48,6 +51,11 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'capybara-webkit'
 end
 
 group :development do
