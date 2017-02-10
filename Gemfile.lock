@@ -280,14 +280,7 @@ DEPENDENCIES
   web-console
 
 RUBY VERSION
-<<<<<<< HEAD
-   ruby 2.2.3p173
-
-BUNDLED WITH
-   1.13.7
-=======
    ruby 2.4.0p0
 
 BUNDLED WITH
    1.14.3
->>>>>>> d6cdf9eabf3f5fb374e3455307cf390856ddf0e1
