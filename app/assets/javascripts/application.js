@@ -13,7 +13,8 @@
 //= require underscore
 //= require gmaps/google
 //= require jquery
-//= require jquery_ujs
+//= require tether
 //= require bootstrap-sprockets
-//= require turbolinks
+//= require creative
+//= require jquery_ujs
 //= require_tree .
