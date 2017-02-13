@@ -1,6 +1,12 @@
 <div class="form-group">
   <div class='container'><div class='row'>
-    <button id='currentLocation' class="btn btn-large btn-default">Use Current Location</button>
+    <div class="col-md-10 offset-md-1 text-center">
+      <h1 class="section-heading makeWalk" style="font-family:'Rock Salt', cursive;">New Path!</h1>
+      <hr class="primary">
+      </br>
+      <button id='currentLocation' class="btn btn-primary btn-xl sr-button">Use Current Location</button>
+      </br>
+    </div>
   </div>
 </br>
 </div>
@@ -16,41 +22,63 @@
       </ul>
     </div>
   <% end %>
-
-
-  <div class="field">
-    <%= f.fields_for :start_location_attributes do |ff| %>
-       <%= ff.text_field :address ,  placeholder: "enter your starting point.", class:"form-control" , id:"start_address" %>
-       <%= ff.text_field :latitude ,  placeholder: "enter your starting point.", class:"form-control", id:"start_lat", style:"display:none;" %>
-       <%= ff.text_field :longitude ,  placeholder: "enter your starting point.", class:"form-control" , id:"start_long", style:"display:none;" %>
-     <% end -%>
-  </div>
-</br>
-  <div class="field">
-    <%= f.fields_for :end_location_attributes do |ff| %>
-       <%= ff.text_field :address ,  placeholder: "enter your end point." , class:"form-control" %>
-     <% end -%>
-  </div>
-
-</br>
-
-  <div class="field">
-    <%= f.label :fatalities %>
-    <%= f.check_box :fatalities %>
-  </div>
-
-  <div class="field">
-    <%= f.label :crime %>
-    <%= f.check_box :crime %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Walk!", class:"btn btn-large btn-default" %>
-  </div>
-
-  <div id="map" style="height: 500px; width: 500px; margin: auto;"></div>
-<% end %>
 </div>
+  
+<div class="form-group">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="field">
+            <%= f.fields_for :start_location_attributes do |ff| %>
+            <%= ff.text_field :address ,  placeholder: "Enter your starting point.", class:"form-control" , id:"start_address" %>
+            <%= ff.text_field :latitude ,  placeholder: "Enter your starting point.", class:"form-control", id:"start_lat", style:"display:none;" %>
+            <%= ff.text_field :longitude ,  placeholder: "Enter your starting point.", class:"form-control" , id:"start_long", style:"display:none;" %>
+            <% end -%>
+        </div>
+        </br>
+        <div class="field">
+          <%= f.fields_for :end_location_attributes do |ff| %>
+            <%= ff.text_field :address ,  placeholder: "Enter your end point." , class:"form-control" %>
+           <% end -%>
+        </div>
+        </br>
+       </div> <!--container-->
+    </div> <!--row-->
+    <div class="row">
+      <div class="text-center col-md-6">
+        <div class="field">
+          <%= f.label :fatalities %>
+          <%= f.check_box :fatalities %>
+        </div>
+      </div>
+      <div class="text-center col-md-6">
+        <div class="field">
+          <%= f.label :crime %>
+          <%= f.check_box :crime %>
+        </div>
+      </div>
+    </div> <!--row-->
+    </br>
+    <div class="row">
+      <div class="col-md-10 offset-md-1 text-center">
+        <div class="actions">
+          <%= f.submit "Walk!", class:"btn btn-primary btn-xl sr-button" %>
+        </div>
+        <br>
+        <div>
+          <aside class="footnotes">
+            <p><strong>*Fatalites</strong>: checking this box displays pedestrian fatalities within your route.</p>
+            <p><strong>*Crime</strong>: checking this box displays crime within your route.</p>
+          </aside>
+        </div>
+        <div id="map" style="height: 500px; width: 500px; margin: auto;"></div>
+        <% end %>
+      </div>
+    </div><!--row-->
+  </div> <!--container-->
+</div> <!--2nd form-group-->
+
+
 
 <script>
 $(document).ready(function(){

@@ -210,8 +210,8 @@ aside {
         margin-right: auto;
     }
 }
-.section-heading {
-  margin-top: 0;
+.makeWalk{
+  margin-top:2em;
 }
 .service-box {
   max-width: 400px;
@@ -395,7 +395,7 @@ fieldset[disabled] .btn-primary.active {
   background-color: white;
 }
 .btn {
-    border: none;
+    /*border: none;*/
     border-radius: 300px;
     font-weight: 700;
     text-transform: uppercase;
@@ -425,4 +425,19 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #222222;
+}
+.footnotes{
+  background: #1f8dd6; /* same color as selected state on site menu */
+  margin: 1em;
+  padding: 1em;
+  border-radius: 3px;
+  color: #fff;
+  border-radius: 2px;
+}
+.footnotes p {
+  margin:0;
+  letter-spacing: 1px;
+}
+.yourWalks-header{
+  margin-top: 3.5em;
 }
