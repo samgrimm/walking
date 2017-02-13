@@ -1,5 +1,7 @@
+
 (function($) {
     console.log("It works on each visit!");
+  
     "use strict"; // Start of use strict
 
     // jQuery for page scrolling feature - requires jQuery Easing plugin
