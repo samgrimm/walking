@@ -1,15 +1,5 @@
 <div class="form-group">
-  <div class='container'><div class='row'>
-    <div class="col-md-10 offset-md-1 text-center">
-      <h1 class="section-heading makeWalk" style="font-family:'Rock Salt', cursive;">New Path!</h1>
-      <hr class="primary">
-      </br>
-      <button id='currentLocation' class="btn btn-primary btn-xl sr-button">Use Current Location</button>
-      </br>
-    </div>
-  </div>
-</br>
-</div>
+
 <%= form_for(walk) do |f| %>
   <% if walk.errors.any? %>
     <div id="error_explanation">
