@@ -8,6 +8,7 @@ body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
 hr {
+  text-decoration: none;
   border-color: #F05F40;
   border-width: 3px;
   max-width: 50px;
@@ -441,3 +442,4 @@ body {
 .yourWalks-header{
   margin-top: 3.5em;
 }
+
