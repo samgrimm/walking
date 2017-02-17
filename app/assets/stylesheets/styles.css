@@ -443,3 +443,21 @@ body {
   margin-top: 3.5em;
 }
 
+.containerShowHtml{
+  margin-top: 5em;
+}
+
+.containerShowHtml h3{
+  font-family: 'Rock Salt';
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.panelBodyShowHtml{
+  font-family: 'Raleway';
+}
+
+.positionConfirm{
+  margin:0;
+}
+
