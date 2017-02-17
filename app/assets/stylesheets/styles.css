@@ -489,10 +489,10 @@ body {
   padding:10px;
 }
 
-#loginTitle{
+#loginTitle, #registerTitle{
   margin-top: 5em;
 }
 
-#loginText{
+#loginText, #registerText{
   font-family: Raleway;
 }
