@@ -1,17 +1,31 @@
 <p id="notice"><%= notice %></p>
 <div class="container text-center containerShowHtml">
-  <div class="row">
-    <div class="col-md-6 offset-md-3 col-xs-12"> 
       <div class="panel panel-default">
-      <div class="panel-heading"><h3>Stay safe!</h3></div>
+        <div class="panel-heading"><h3>Stay safe!</h3></div>
+      </div> <!--panel-default-->
       <hr><br>
-        <div class="panel-body panelBodyShowHtml"> 
-          <strong>Start address:</strong>
-          <%= @walk.start_location.address %>
-          <br>
-          <strong>End address:</strong>
-          <%= @walk.end_location.address %>
+  <div class="row">
+    <div class="col-lg-4 col-md-6 col-sm-12"> 
+      <div class="card" id="showCard">
+        <div class="card-block" id="cardTop"> 
+          <p><strong>Start address:</strong>
+          <%= @walk.start_location.address %></p>
+          <p><strong>End address:</strong>
+          <%= @walk.end_location.address %></p>
         </div>
+        
+        <div class="card-block">
+            <div class="card-text">
+              <p class="positionConfirm">Report Location</p>  
+              <button id='confirm' class="btn btn-primary btn-md"><i class="fa fa-map-pin" aria-hidden="true"></i>
+</button>
+              <p class="positionConfirm">Report Issue</p> 
+              <button id='report' class="btn btn-primary btn-md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+</button> 
+            </div>
+        </div> <!--card-block-->
+      </div> <!--card-->
+  
         <div class="panel-footer">
           <% if @walk.fatalities %>
           <p>You selected the following map overlay: <strong>Fatalities</strong></p> 
@@ -20,42 +34,27 @@
           <p>You selected the following map overlay: <strong>Crime</strong></p> 
           <% end %>
         </div>
-  <div class="form-group">
-    <%= form_for(@issue) do |f| %>
-      <%= f.text_field :lat, class:"form-control", id:"issue_lat", style:"display:none;" %>
-      <%= f.text_field :lng , class:"form-control" , id:"issue_long", style:"display:none;" %>
-      <div id="allFields" style="display:none;">
-        <div class="field">
-          <%= f.label :description %>
-          <%= f.text_field :description , class:"form-control" , id:"issue_desc" %>
-        </div>
-        <div class="field">
-          <%= f.label :category %>
-          <%= f.select :category, ['Does Not Exist', 'Large Crack', 'Obstacle'] %>
-        </div>
-        <div class="actions">
-          <%= f.submit "Report it!", class:"btn btn-large btn-primary", id:'submitted' %>
-        </div>
-      </div>
-    <% end%>
-  <br>
-    <div class="container text-center">
-      <div class="row">
-        <div class="col-md-12">
-          <p class="positionConfirm">Want to report an issue?</p>  
-          <button id='confirm' class="btn btn-primary" >Yes, confirm my position</button>
-        </div>
-      </div> <!--row-->
-      <br>
-      <div class="row">
-        <div class="col-md-12">
-          <p class="positionConfirm">What seems to be the problem?</p> 
-          <button id='report' class="btn btn-primary">Report Issue</button> 
-        </div>
-      </div> <!--row-->
-    </div> <!--container-->
-  </div> <!--form-group-->
-</div> <!--panel-default-->
+        
+        <div class="form-group">
+          <%= form_for(@issue) do |f| %>
+            <%= f.text_field :lat, class:"form-control", id:"issue_lat", style:"display:none;" %>
+            <%= f.text_field :lng , class:"form-control" , id:"issue_long", style:"display:none;" %>
+            <div id="allFields" style="display:none;">
+              <div class="field">
+                <%= f.label :description %>
+                <%= f.text_field :description , class:"form-control" , id:"issue_desc" %>
+              </div>
+              <div class="field">
+                <%= f.label :category %>
+                <%= f.select :category, ['Does Not Exist', 'Large Crack', 'Obstacle'] %>
+              </div>
+              <div class="actions">
+                <%= f.submit "Report it!", class:"btn btn-large btn-primary", id:'submitted' %>
+              </div>
+            </div>
+          <% end%>
+          <br>
+        </div> <!--form-group-->
 </div> <!--col-->
 
 
@@ -75,7 +74,7 @@
   data: {issues: @issues} do %>
 <% end %>
 
-<div class="col-md-12">
+<div class="col-lg-8 col-md-6 col-sm-12">
   <div id="map" style="height: 500px; width: 100%; margin: auto; position: none;"></div> <!-- changed css styles -->
   <!-- 
   @media screen and (max-width:399px) {
@@ -102,7 +101,6 @@
     margin: auto;
     position: none;
   } -->
-
 </div> <!--map col-->
 </div> <!--row-->
 </div> <!--container-->
