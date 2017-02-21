@@ -1,4 +1,3 @@
-
 html,
 body {
   height: 100%;
@@ -489,7 +488,7 @@ body {
   padding:10px;
 }
 
-#loginTitle, #registerTitle{
+#loginTitle, #registerTitle, #forgotPassTitle{
   margin-top: 5em;
 }
 
