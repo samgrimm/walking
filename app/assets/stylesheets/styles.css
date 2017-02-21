@@ -1,4 +1,3 @@
-
 html,
 body {
   height: 100%;
@@ -479,19 +478,6 @@ body {
   }
 }
 
-.card-header{
-  border: 1px solid lightgray;
-  /*height:5em;*/
-}
-
-.card-block{
-  padding:10px;
-}
-
-.card-header{
-  padding:0;
-}
-
 #showCard {
   height:500px;
 }
@@ -499,4 +485,16 @@ body {
 #cardTop{
   background-color: lightgray;
   height: 1em;
+  padding:10px;
+}
+
+#loginTitle, 
+#registerTitle, 
+#newPassTitle,
+#editPassTitle{
+  margin-top: 5em;
+}
+
+#loginText, #registerText{
+  font-family: Raleway;
 }
