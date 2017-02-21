@@ -488,7 +488,10 @@ body {
   padding:10px;
 }
 
-#loginTitle, #registerTitle, #forgotPassTitle{
+#loginTitle, 
+#registerTitle, 
+#newPassTitle,
+#editPassTitle{
   margin-top: 5em;
 }
 
