@@ -17,7 +17,7 @@
     </div>
   <% end %>
 
-
+<div class="container">
   <div class="field">
     <%= f.fields_for :start_location_attributes do |ff| %>
        <%= ff.text_field :address ,  placeholder: "enter your starting point.", class:"form-control" , id:"start_address" %>
@@ -47,6 +47,8 @@
   <div class="actions">
     <%= f.submit "Walk!", class:"btn btn-large btn-default" %>
   </div>
+</div>
+
 
   <div id="map" style="height: 500px; width: 500px; margin: auto;"></div>
 <% end %>
