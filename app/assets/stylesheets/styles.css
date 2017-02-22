@@ -1,4 +1,3 @@
-
 html,
 body {
   height: 100%;
@@ -8,6 +7,7 @@ body {
   font-family: 'Merriweather', 'Helvetica Neue', Arial, sans-serif;
 }
 hr {
+  text-decoration: none;
   border-color: #F05F40;
   border-width: 3px;
   max-width: 50px;
@@ -210,8 +210,8 @@ aside {
         margin-right: auto;
     }
 }
-.section-heading {
-  margin-top: 0;
+.makeWalk{
+  margin-top:2em;
 }
 .service-box {
   max-width: 400px;
@@ -395,7 +395,7 @@ fieldset[disabled] .btn-primary.active {
   background-color: white;
 }
 .btn {
-    border: none;
+    /*border: none;*/
     border-radius: 300px;
     font-weight: 700;
     text-transform: uppercase;
@@ -425,4 +425,76 @@ img::-moz-selection {
 }
 body {
   webkit-tap-highlight-color: #222222;
+}
+.footnotes{
+  background: #1f8dd6; /* same color as selected state on site menu */
+  margin: 1em;
+  padding: 1em;
+  border-radius: 3px;
+  color: #fff;
+  border-radius: 2px;
+}
+.footnotes p {
+  margin:0;
+  letter-spacing: 1px;
+}
+.yourWalks-header{
+  margin-top: 3.5em;
+}
+
+.containerShowHtml{
+  margin-top: 5em;
+}
+
+.containerShowHtml h3{
+  font-family: 'Rock Salt';
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.panelBodyShowHtml{
+  font-family: 'Raleway';
+}
+
+.positionConfirm{
+  margin:0;
+}
+
+@media (min-width: 768px) {
+  .card-header > p{
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-header > p {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-header > p {
+    font-size: 20px;
+  }
+}
+
+#showCard {
+  height:500px;
+}
+
+#cardTop{
+  background-color: lightgray;
+  height: 1em;
+  padding:10px;
+}
+
+#loginTitle, 
+#registerTitle, 
+#newPassTitle,
+#editPassTitle{
+  margin-top: 5em;
+}
+
+#loginText, #registerText{
+  font-family: Raleway;
 }
