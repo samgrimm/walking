@@ -2,15 +2,9 @@
 
 <%= form_for(walk) do |f| %>
   <% if walk.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(walk.errors.count, "error") %> prohibited this walk from being saved:</h2>
-
-      <ul>
-      <% walk.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+    <% walk.errors.full_messages.each do |error| %>
+      <%= alert_generator error %>
+    <% end %>
   <% end %>
 </div>
 

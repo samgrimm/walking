@@ -1,40 +1,39 @@
-<p id="notice"><%= notice %></p>
 <div class="container text-center containerShowHtml">
       <div class="panel panel-default">
         <div class="panel-heading"><h3>Stay safe!</h3></div>
       </div> <!--panel-default-->
       <hr><br>
   <div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-12"> 
+    <div class="col-lg-4 col-md-6 col-sm-12">
       <div class="card" id="showCard">
-        <div class="card-block" id="cardTop"> 
+        <div class="card-block" id="cardTop">
           <p><strong>Start address:</strong>
           <%= @walk.start_location.address %></p>
           <p><strong>End address:</strong>
           <%= @walk.end_location.address %></p>
         </div>
-        
+
         <div class="card-block">
             <div class="card-text">
-              <p class="positionConfirm">Report Location</p>  
+              <p class="positionConfirm">Report Location</p>
               <button id='confirm' class="btn btn-primary btn-md"><i class="fa fa-map-pin" aria-hidden="true"></i>
 </button>
-              <p class="positionConfirm">Report Issue</p> 
+              <p class="positionConfirm">Report Issue</p>
               <button id='report' class="btn btn-primary btn-md"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-</button> 
+</button>
             </div>
         </div> <!--card-block-->
       </div> <!--card-->
-  
+
         <div class="panel-footer">
           <% if @walk.fatalities %>
-          <p>You selected the following map overlay: <strong>Fatalities</strong></p> 
+          <p>You selected the following map overlay: <strong>Fatalities</strong></p>
           <% end %>
           <% if @walk.crime %>
-          <p>You selected the following map overlay: <strong>Crime</strong></p> 
+          <p>You selected the following map overlay: <strong>Crime</strong></p>
           <% end %>
         </div>
-        
+
         <div class="form-group">
           <%= form_for(@issue) do |f| %>
             <%= f.text_field :lat, class:"form-control", id:"issue_lat", style:"display:none;" %>
@@ -76,27 +75,27 @@
 
 <div class="col-lg-8 col-md-6 col-sm-12">
   <div id="map" style="height: 500px; width: 100%; margin: auto; position: none;"></div> <!-- changed css styles -->
-  <!-- 
+  <!--
   @media screen and (max-width:399px) {
-    width: 100%; 
+    width: 100%;
     height: 300px;
     margin: auto;
     position: none;
   }
   @media screen and (min-width:400px) {
-    width: 100%; 
+    width: 100%;
     height: 500px;
     margin: auto;
     position: none;
   }
   @media screen and (min-width:763px) {
-    width: 100%; 
+    width: 100%;
     height: 500px;
     margin: auto;
     position: none;
   }
   @media screen and (min-width:992px) {
-    width: 100%; 
+    width: 100%;
     height: 500px;
     margin: auto;
     position: none;
